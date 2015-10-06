@@ -1,14 +1,24 @@
 #! /usr/bin/env node
 
-var _ = require('lodash')
+var subcommand = require('subcommand')
+var usage = require('./lib/usage.js')('root.txt')
 
-var name = process.argv.slice(2)[0]
-var args = _.filter(process.argv, function(d) {return d !== name})
+var config = {
+  root: require('./bin/root.js'),
+  commands: [
+    require('./bin/build.js'),
+    require('./bin/stage.js'),
+    require('./bin/help.js')
+  ],
+  defaults: require('./bin/defaults.js'),
+  none: noMatch
+}
 
-switch (name) {
-  case 'build':
-    require('binder-build').cli(args)
-    break
-  default:
-    console.error('binder <command(s)> [--flag] [--key=value]')
+var route = subcommand(config)
+route(process.argv.slice(2))
+
+function noMatch (args) {
+  console.error("binder:", "'" + args._[0] + "'", 
+    "is not a valid command. See 'binder --help' for usage.")
+  process.exit(1)
 }
