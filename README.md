@@ -9,21 +9,17 @@ Make it easy to mix and match use cases and environments: local or cloud deploym
 Example usage:
 
 ```
-binder stage binder-project/example-requirements --dependency='Dockerfile' > spec.json
+binder build github.com/user/name --server='build.mybinder.org' -token='blah'
 ```
 
 ```
-binder build spec.json --server='build.mybinder.org' -api-token='blah'
+binder register example-requirements --server='registry.mybinder.org' -token='blah'
 ```
 
 ```
-binder register example-requirements --registry='registry.mybinder.org' -api-token='blah' > template.json
+binder launch example-requirements --host='local' -api-token='blah'
 ```
 
 ```
-binder launch template.json --host='local' -api-token='blah'
-```
-
-```
-binder launch template.json --host='app.mybinder.org' -api-token='blah'
+binder launch example-requirements --host='app.mybinder.org' -api-token='blah'
 ```

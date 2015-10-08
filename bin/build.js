@@ -2,7 +2,7 @@ var usage = require('../lib/usage.js')('build.txt')
 
 module.exports = {
   name: 'build',
-  command: handleBuild,
+  command: build,
   options: [
     {
       name: 'build-server',
@@ -17,7 +17,7 @@ module.exports = {
   ]
 }
 
-function handleBuild(args) {
+function build(args) {
 
 	if (args._.length === 0) return usage()
 

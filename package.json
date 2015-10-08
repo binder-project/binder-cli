@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/binder-project/binder-cli#readme",
   "dependencies": {
+    "request": "^2.64.0",
     "subcommand": "^2.0.3"
   }
 }

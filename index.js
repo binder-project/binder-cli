@@ -7,18 +7,19 @@ var config = {
   root: require('./bin/root.js'),
   commands: [
     require('./bin/build.js'),
-    require('./bin/stage.js'),
+    require('./bin/register.js'),
     require('./bin/help.js')
   ],
   defaults: require('./bin/defaults.js'),
   none: noMatch
 }
 
+var args = process.argv.slice(2)
 var route = subcommand(config)
-route(process.argv.slice(2))
+route(args)
 
 function noMatch (args) {
-  console.error("binder:", "'" + args._[0] + "'", 
+  console.error("binder:", "'" + args[0] + "'", 
     "is not a valid command. See 'binder --help' for usage.")
   process.exit(1)
 }
