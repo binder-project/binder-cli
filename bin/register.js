@@ -32,13 +32,13 @@ function register(args) {
 
   var callback = function(error, response, body) {
     if (error) {
-      console.log('error registering template:')
+      console.log('Error registering template:')
       console.log(error.code)
     } else {
       if (response.statusCode === 201) {
-        console.log('template registered')
+        console.log('Template registered')
       } else {
-        console.log('failed to register template, got message:')
+        console.log('Failed to register template, got message:')
         console.log(body.message)
       }
     }
