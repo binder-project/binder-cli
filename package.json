@@ -1,0 +1,37 @@
+{
+  "name": "binder-cli",
+  "version": "1.0.0",
+  "description": "command-line tool to manage binder services",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/binder-project/binder-cli.git"
+  },
+  "keywords": [
+    "docker",
+    "binder",
+    "reproduction",
+    "container",
+    "environment",
+    "jupyter"
+  ],
+  "preferGlobal": true,
+  "bin": {
+    "binder": "index.js"
+  },
+  "author": "Jeremy Freeman",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/binder-project/binder-cli/issues"
+  },
+  "homepage": "https://github.com/binder-project/binder-cli#readme",
+  "dependencies": {
+    "chalk": "^1.1.1",
+    "cliclopts": "^1.1.1",
+    "request": "^2.64.0",
+    "subcommand": "^2.0.3"
+  }
+}
