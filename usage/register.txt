@@ -1,1 +1,0 @@
-binder register <image-name> -s <server> -t <token>

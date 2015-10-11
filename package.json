@@ -1,6 +1,6 @@
 {
   "name": "binder-cli",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "command-line tool to manage binder services",
   "main": "index.js",
   "scripts": {
@@ -29,6 +29,8 @@
   },
   "homepage": "https://github.com/binder-project/binder-cli#readme",
   "dependencies": {
+    "chalk": "^1.1.1",
+    "cliclopts": "^1.1.1",
     "request": "^2.64.0",
     "subcommand": "^2.0.3"
   }

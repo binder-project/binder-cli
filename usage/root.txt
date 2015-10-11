@@ -1,1 +1,0 @@
-binder <command(s)> [--flag] [--key=value]

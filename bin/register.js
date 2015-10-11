@@ -1,9 +1,10 @@
-var usage = require('../lib/usage.js')('register.txt')
 var request = require('request')
+var usage = require('../lib/usage.js')
 
 module.exports = {
   name: 'register',
   command: register,
+  help: 'Register a template for future deployment',
   options: [
     {
       name: 'server',
@@ -20,7 +21,8 @@ module.exports = {
 
 function register(args) {
 
-  if (args._.length === 0) return usage()
+  if (args.help || args._.length === 0) return usage(this.options)
+
   var image = args._[0]
 
   var conn = {
