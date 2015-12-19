@@ -1,6 +1,6 @@
 # binder-cli
 
-Interfaces with binder servers over HTTP requests.
+Interfaces over HTTP requests with services that conform to the binder API.
 
 Primary commands:
 
