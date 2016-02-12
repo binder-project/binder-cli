@@ -1,0 +1,9 @@
+#!/usr/bin/env node
+var program = require('commander')
+
+var binderProtocol = require('binder-protocol')
+
+var generateCLI = require('../lib/generate.js')
+
+generateCLI(program, 'registry', binderProtocol)
+program.parse(process.argv)

@@ -1,0 +1,12 @@
+#!/usr/bin/env node
+var program = require('commander')
+
+program
+  .version(require('../package.json').version)
+
+program
+  .command('build', 'Create new builds and get the status of existing builds from a build server')
+  .command('registry', 'Create and read Binder templates from a registry server')
+  .command('deploy', 'Deploy templates on a Binder-compatible backend server')
+
+program.parse(process.argv)
