@@ -3,7 +3,7 @@ var program = require('commander')
 
 var binderProtocol = require('binder-protocol')
 
-var generateCLI = require('../lib/generate.js')
+var generateCLI = require('../lib/generate-cli.js')
 
 generateCLI(program, 'build', binderProtocol)
 program.parse(process.argv)

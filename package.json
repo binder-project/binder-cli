@@ -2,7 +2,10 @@
   "name": "binder-cli",
   "version": "0.1.0",
   "description": "command-line tool to manage binder services",
-  "main": "bin/binder",
+  "main": "index.js",
+  "bin": {
+    "binder": "./bin/binder"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
