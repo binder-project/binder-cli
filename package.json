@@ -4,10 +4,10 @@
   "description": "command-line tool to manage binder services",
   "main": "index.js",
   "bin": {
-    "binder": "./bin/binder"
+    "binder": "index.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha test/"
   },
   "repository": {
     "type": "git",
@@ -22,9 +22,6 @@
     "jupyter"
   ],
   "preferGlobal": true,
-  "bin": {
-    "binder": "index.js"
-  },
   "author": "Jeremy Freeman",
   "license": "Apache-2.0",
   "bugs": {
@@ -38,5 +35,9 @@
     "request": "^2.69.0",
     "string-format": "^0.5.0",
     "url-join": "0.0.1"
+  },
+  "devDependencies": {
+    "async": "^1.5.2",
+    "mocha": "^2.4.5"
   }
 }
