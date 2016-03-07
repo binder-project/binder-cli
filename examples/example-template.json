@@ -1,0 +1,20 @@
+{
+  "name": "binder-project-example-requirements",
+  "image-name": "binder-project/example-requirements",
+  "image-source": "gcr.io/generic-notebooks/binder-project-example-requirements",
+  "limits": {
+    "memory": "512MB",
+    "cpu": "10"
+  },
+  "services": [
+    {
+      "name": "spark",
+      "version": "1.4.1",
+      "params": {
+        "heap_mem": "4g",
+        "stack_mem": "512m"
+      }
+    }
+  ]
+}
+
