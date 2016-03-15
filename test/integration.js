@@ -1,3 +1,5 @@
+var assert = require('assert')
+
 var _ = require('lodash')
 var async = require('async')
 
@@ -11,7 +13,7 @@ var buildOpts = {
 }
 var registryOpts = {
   host: '104.197.23.111',
-  port: '8083',
+  port: '8082',
   'api-key': '60dc798d55521d0552334c70797cb15f'
 }
 var deployOpts = {
@@ -41,7 +43,7 @@ describe('Binder integration --', function () {
   it('should query the progress of an active build until it completes', function (done) {
     this.timeout(20 * 10 * 3000)
     async.retry({ times: 20 * 10, interval: 3000 }, function (next) {
-      binder.build.statusOne(_.merge(buildOpts, { 'image-name': imageName }), function (err, body) {
+      binder.build.status(_.merge(buildOpts, { 'image-name': imageName }), function (err, body) {
         if (err) return next(err)
         if (!(body.status === 'completed')) {
           return next('build not yet completed')
@@ -54,15 +56,12 @@ describe('Binder integration --', function () {
     })
   })
 
-  it('should register a template for the completed build', function (done) {
-    binder.registry.register(_.merge(registryOpts, { template:  {
-      name: templateName,
-      'image-name': imageName,
-      'image-source': registry + imageName + ':latest',
-      'port': 3000,
-      'command': ['/home/main/launch-headless-kernel.sh']
-    } }), function (err, body) {
+  it('should query for the completed build\'s template', function (done) {
+    binder.registry.fetch(_.merge(registryOpts, { 'template-name': imageName }), function (err, body) {
       if (err) throw err
+      assert(body['image-source'])
+      assert(body['name'])
+      assert(body['port'])
       done()
     })
   })
@@ -87,7 +86,7 @@ describe('Binder integration --', function () {
   it('should query the state of the deployed app until it succeeds', function (done) {
     this.timeout(20 * 10 * 3000)
     async.retry({ times: 20 * 10, interval: 3000 }, function (next) {
-      binder.deploy.statusOne(_.merge(deployOpts, {
+      binder.deploy.status(_.merge(deployOpts, {
         'template-name': templateName,
         id: deployId
       }), function (err, body) {
