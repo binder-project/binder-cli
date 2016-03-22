@@ -9,17 +9,17 @@ var binder = require('../lib/generate-client.js')
 var buildOpts = {
   host: '104.197.23.111',
   port: '8082',
-  'api-key': '60dc798d55521d0552334c70797cb15f'
+  'api-key': '880df8bbabdf4b48f412208938c220fe'
 }
 var registryOpts = {
   host: '104.197.23.111',
   port: '8082',
-  'api-key': '60dc798d55521d0552334c70797cb15f'
+  'api-key': '880df8bbabdf4b48f412208938c220fe'
 }
 var deployOpts = {
   host: '104.197.23.111',
   port: '8084',
-  'api-key': '60dc798d55521d0552334c70797cb15f'
+  'api-key': '880df8bbabdf4b48f412208938c220fe'
 }
 
 var testRepo = 'https://www.github.com/binder-project/example-requirements'
@@ -33,9 +33,9 @@ describe('Binder integration --', function () {
   var deployId = null
 
   it('should start building the test repo', function (done) {
-    binder.build.start(_.merge(buildOpts, { repository: testRepo }), function (err, body) {
+    binder.build.start(_.merge({}, buildOpts, { repository: testRepo }), function (err, body) {
       if (err) throw err
-      imageName = body['image-name']
+      imageName = body['name']
       return done()
     })
   })
@@ -43,7 +43,7 @@ describe('Binder integration --', function () {
   it('should query the progress of an active build until it completes', function (done) {
     this.timeout(20 * 10 * 3000)
     async.retry({ times: 20 * 10, interval: 3000 }, function (next) {
-      binder.build.status(_.merge(buildOpts, { 'image-name': imageName }), function (err, body) {
+      binder.build.status(_.merge({}, buildOpts, { 'image-name': imageName }), function (err, body) {
         if (err) return next(err)
         if (!(body.status === 'completed')) {
           return next('build not yet completed')
@@ -57,7 +57,7 @@ describe('Binder integration --', function () {
   })
 
   it('should query for the completed build\'s template', function (done) {
-    binder.registry.fetch(_.merge(registryOpts, { 'template-name': imageName }), function (err, body) {
+    binder.registry.fetch(_.merge({}, registryOpts, { 'template-name': imageName }), function (err, body) {
       if (err) throw err
       assert(body['image-source'])
       assert(body['name'])
@@ -68,25 +68,26 @@ describe('Binder integration --', function () {
 
   it('should preload the template onto all nodes of the cluster', function (done) {
     this.timeout(1000 * 60 * 5)
-    binder.deploy._preload(_.merge(deployOpts, { 'template-name': templateName }), function (err, body) {
+    binder.deploy._preload(_.merge({}, deployOpts, { 'template-name': templateName }), function (err, body) {
       console.error(err)
       if (err) throw err
       done()
     })
   })
 
-  it('should deploy an app from the registered template', function (done) {
-    binder.deploy.deploy(_.merge(deployOpts, { 'template-name': templateName }), function (err, body) {
+  it('should deploy one app instance from the registered template', function (done) {
+    this.timeout(1000 * 10)
+    binder.deploy.deploy(_.merge({}, deployOpts, { 'template-name': templateName }), function (err, body) {
       if (err) throw err
       deployId = body.id
       done()
     })
   })
 
-  it('should query the state of the deployed app until it succeeds', function (done) {
+  it('should query the state of the deployed apps until they succeeds', function (done) {
     this.timeout(20 * 10 * 3000)
     async.retry({ times: 20 * 10, interval: 3000 }, function (next) {
-      binder.deploy.status(_.merge(deployOpts, {
+      binder.deploy.status(_.merge({}, deployOpts, {
         'template-name': templateName,
         id: deployId
       }), function (err, body) {
@@ -96,10 +97,9 @@ describe('Binder integration --', function () {
         }
         return next(null)
     })
-  }, function (err, results) {
-    if (err) throw new Error(err)
-    done()
+    }, function (err, results) {
+      if (err) throw new Error(err)
+      return done()
+    })
   })
-  })
-
 })
