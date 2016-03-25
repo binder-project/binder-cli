@@ -1,10 +1,10 @@
 {
-  "name": "binder-cli",
+  "name": "binder-client",
   "version": "1.0.0",
   "description": "command-line tool to manage binder services",
   "main": "index.js",
   "bin": {
-    "binder": "index.js"
+    "binder": "./bin/binder"
   },
   "scripts": {
     "test": "mocha test/"
