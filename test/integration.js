@@ -7,19 +7,19 @@ var binder = require('../lib/generate-client.js')
 
 // TODO: set these parameters according to your test environment
 var buildOpts = {
-  host: '104.197.23.111',
+  host: 'N/A',
   port: '8082',
-  'api-key': '880df8bbabdf4b48f412208938c220fe'
+  'api-key': 'N/A'
 }
 var registryOpts = {
-  host: '104.197.23.111',
+  host: 'N/A',
   port: '8082',
-  'api-key': '880df8bbabdf4b48f412208938c220fe'
+  'api-key': 'N/A'
 }
 var deployOpts = {
-  host: '104.197.23.111',
+  host: 'N/A',
   port: '8084',
-  'api-key': '880df8bbabdf4b48f412208938c220fe'
+  'api-key': 'N/A'
 }
 
 var testRepo = 'https://www.github.com/binder-project/example-requirements'
