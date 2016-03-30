@@ -1,6 +1,6 @@
 {
   "name": "binder-client",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "command-line tool to manage binder services",
   "main": "index.js",
   "bin": {
@@ -29,6 +29,8 @@
   },
   "homepage": "https://github.com/binder-project/binder-client#readme",
   "dependencies": {
+    "binder-logging": "^1.0.0",
+    "binder-protocol": "^1.0.0",
     "commander": "^2.9.0",
     "jsonfile": "^2.2.3",
     "lodash": "^4.3.0",
