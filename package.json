@@ -1,6 +1,6 @@
 {
   "name": "binder-client",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "command-line tool to manage binder services",
   "main": "index.js",
   "bin": {

@@ -6,4 +6,11 @@ var binderProtocol = require('binder-protocol')
 var generateCLI = require('../lib/generate-cli.js')
 
 generateCLI(program, 'deploy', binderProtocol)
+
+program
+  .command('help', { isDefault: true })
+  .action(function () {
+    program.help()
+  })
+
 program.parse(process.argv)
